@@ -11,12 +11,17 @@ export default class control {
           player.moveRight(ctx);
           break;
 
+        case 32:
+          if (!this.stop) {
+            this.stop = true;
+            break;
+          } else {
+            this.stop = false;
+            break;
+          }
+
         default:
           break;
-        case 27:
-          this.stop = true;
-          break;
-
         // case 32:
         //   game.start();
         //   break;

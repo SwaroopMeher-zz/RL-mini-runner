@@ -1,3 +1,4 @@
+import game from "./game";
 import obstacle from "./obstacle";
 import "./styles.css";
 import control from "/src/control.js";
@@ -47,6 +48,11 @@ new background(ctx2);
 new background(ctx);
 
 let player = new runner(GAME_WIDTH, GAME_HEIGHT);
+let blockpos = [
+  GAME_WIDTH / 2 - 30 / 2 - 100,
+  GAME_WIDTH / 2 - 30 / 2,
+  GAME_WIDTH / 2 - 30 / 2 + 100
+];
 
 // player.update();
 // player.draw(ctx);
@@ -54,18 +60,21 @@ let joystick = new control(player, ctx);
 
 let lastTime = 0;
 let block = new obstacle(GAME_WIDTH, GAME_HEIGHT);
-function gameLoop(timestamp) {
+let block2 = new obstacle(GAME_WIDTH, GAME_HEIGHT);
+
+//let gamebox = new game(GAME_WIDTH, GAME_HEIGHT);
+function gameLoop() {
   if (!joystick.stop) {
     ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
     block.moveDown(ctx);
+    block2.moveDown(ctx);
     player.draw(ctx);
 
     requestAnimationFrame(gameLoop);
   } else {
-    ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
-    ctx2.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+    cancelAnimationFrame(gameLoop);
+    requestAnimationFrame(gameLoop);
   }
 }
-
-gameLoop();
+requestAnimationFrame(gameLoop);
