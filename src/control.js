@@ -1,14 +1,20 @@
+import { gameReset, gameStart } from ".";
+
 export default class control {
   constructor(player, ctx) {
     this.stop = false;
     document.addEventListener("keydown", (event) => {
       switch (event.keyCode) {
         case 37:
-          player.moveLeft(ctx);
+          if (gameStart) {
+            player.moveLeft(ctx);
+          }
           break;
 
         case 39:
-          player.moveRight(ctx);
+          if (gameStart) {
+            player.moveRight(ctx);
+          }
           break;
 
         case 32:
@@ -19,7 +25,9 @@ export default class control {
             this.stop = false;
             break;
           }
-
+        case 27:
+          gameReset();
+          break;
         default:
           break;
         // case 32:

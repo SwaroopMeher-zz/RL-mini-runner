@@ -1,5 +1,9 @@
 export default class runner {
   constructor(gameWidth, gameHeight) {
+    this.initialize(gameWidth, gameHeight);
+  }
+
+  initialize(gameWidth, gameHeight) {
     this.width = 30;
     this.height = 30;
     this.position = {
