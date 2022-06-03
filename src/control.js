@@ -6,25 +6,28 @@ export default class control {
     document.addEventListener("keydown", (event) => {
       switch (event.keyCode) {
         case 37:
-          if (gameStart) {
+          if (gameStart && !this.stop) {
             player.moveLeft(ctx);
           }
           break;
 
         case 39:
-          if (gameStart) {
+          if (gameStart && !this.stop) {
             player.moveRight(ctx);
           }
           break;
 
         case 32:
-          if (!this.stop) {
-            this.stop = true;
-            break;
-          } else {
-            this.stop = false;
-            break;
+          if (gameStart) {
+            if (!this.stop) {
+              this.stop = true;
+              break;
+            } else {
+              this.stop = false;
+              break;
+            }
           }
+          break;
         case 27:
           gameReset();
           break;
